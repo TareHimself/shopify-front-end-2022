@@ -19,7 +19,7 @@ export default function App() {
 
         if (!openAi.current) {
             openAi.current = new OpenAIApi(new Configuration({
-                apiKey: process.env.OPENAI_API_KEY,
+                apiKey: process.env.REACT_APP_OPENAI_API_KEY,
             }));
         }
 
