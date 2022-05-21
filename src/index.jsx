@@ -1,8 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import './App.css';
+import useOpenAI from './hooks/useOpenAI';
+import { useCallback, useState } from 'react';
 import reportWebVitals from './reportWebVitals';
+
+function App() {
+
+  const [responses, setResponses] = useState([]);
+
+  const onResponseRecieved = useCallback((response) => {
+    setResponses([response, ...responses])
+  }, [responses, setResponses])
+
+  const [sendPrompt, changeEngine] = useOpenAI(onResponseRecieved);
+
+  return (
+    <div className="App">
+      <button onClick={() => { sendPrompt("How do i tie my shoes") }}>Request</button>
+    </div>
+  );
+}
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
